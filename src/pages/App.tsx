@@ -9,12 +9,16 @@ import { ITarefa } from "../types/tarefas";
 
 function App() {
   const [tarefas, setTarefas] = useState<ITarefa[] | []>([])
-  console.log(tarefas)
+  const [selecionado, setSelecionado] = useState<ITarefa>()
+  
+  const selecionaTarefa = (tarefaSelecionado: ITarefa) => {
+    setSelecionado(tarefaSelecionado)
+  }
 
   return (
   <div className={styles.AppStyle}>
     <Formulario setTarefas={setTarefas}/>
-    <Lista tarefas={tarefas} />
+    <Lista selecionaTarefa={selecionaTarefa} tarefas={tarefas} />
     <Cronometro />
   </div>
   );
