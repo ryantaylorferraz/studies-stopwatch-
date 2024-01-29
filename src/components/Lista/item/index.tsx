@@ -1,5 +1,8 @@
 import { ITarefa } from "../../../types/tarefas";
-import styles from "../style.module.scss"
+import styles from "./style.module.scss"
+import { CiCircleCheck } from "react-icons/ci";
+
+
 
 interface Props extends ITarefa {
 
@@ -7,10 +10,10 @@ interface Props extends ITarefa {
 }
 
 export const Item = ({tarefa, tempo, selecionado, completado, id, selecionaTarefa}: Props) => {
-  console.log("item atual:", {tarefa, tempo, selecionado, completado, id})
+
 
   return (
-    <li className={styles.item} onClick={() => selecionaTarefa({
+    <li className={`${styles.item} ${selecionado ? styles.itemSelecionado : ''} ${completado ? styles.itemCompletado : ''}`} onClick={() => !completado && selecionaTarefa({
       tarefa,
       tempo,
       selecionado,
@@ -19,6 +22,8 @@ export const Item = ({tarefa, tempo, selecionado, completado, id, selecionaTaref
     })}>
       <h3>{tarefa}</h3>
       <span>{tempo}</span>
+      {completado && <span className={styles.concluido} aria-label="tarefa completada"><CiCircleCheck />
+</span>}
     </li>
   );
 };

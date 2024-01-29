@@ -3,9 +3,13 @@ import Botao from '../Botão'
 import styles from './style.module.scss'
 import { ITarefa } from '../../types/tarefas';
 
-export const Formulario = ({setTarefas}: {setTarefas: React.Dispatch<React.SetStateAction<ITarefa[]>>}) => {
-    const [tarefa, setTarefa] = useState("php");
-    const [tempo, setTempo] = useState("01:00:00")
+interface Props {
+    setTarefas: React.Dispatch<React.SetStateAction<ITarefa[]>>
+}
+
+export const Formulario = ({setTarefas}: Props) => {
+    const [tarefa, setTarefa] = useState("React");
+    const [tempo, setTempo] = useState("00:00:02")
 
     const adicionarTarefa = (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
