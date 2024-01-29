@@ -5,6 +5,7 @@
     padding: 12px;
     margin-bottom: 8px;
     position: relative;
+    overflow: none;
     cursor: pointer;
   
     h3 {
@@ -31,7 +32,9 @@
     cursor: auto;
   
     .concluido {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background-image: url('../../../assets/img/check-mark.svg');
       background-repeat: no-repeat;
       background-size: 38px 38px;

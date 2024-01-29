@@ -12,6 +12,7 @@ interface Props{
 
 export const Cronometro = ({selecionado, finalizarTarefa}: Props) => {
   const [tempo, setTempo] = useState<number>()
+  const [running, setRunning] = useState(false)
 
   useEffect(() => {
     if(selecionado?.tempo) {
@@ -19,24 +20,54 @@ export const Cronometro = ({selecionado, finalizarTarefa}: Props) => {
     }
   }, [selecionado]) // [] ==> array de dependencia
 
-  const regressiva = (contador: number = 0) => {
-    setTimeout(() => {
-      if(contador > 0) {
-        setTempo(contador - 1)
-        return regressiva(contador - 1)
-      }
-      finalizarTarefa()
-    }, 1000)
+  const startCounter = () => {
+    setRunning(true);
   }
+  const stopCounter = () => {
+    setRunning(false);
+  }
+
+  const resetCounter = () => {
+    if(selecionado?.tempo) {
+      setTempo(tempoParaSegundos(selecionado.tempo))
+    }
+    setRunning(false)
+  }
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout | undefined;
+    if(running) {
+      if(tempo) {
+        intervalId = setInterval(() => {
+          setTempo((prevCounter) => prevCounter && prevCounter > 0 ? prevCounter - 1 : prevCounter);
+        }, 1000);
+      } else {
+        finalizarTarefa()
+      } 
+    }
+
+    return () => clearInterval(intervalId);
+  }, [running, tempo, finalizarTarefa])
+
+
   return (
     <div className={styles.cronometro}>
         <p className={styles.titulo}>Escolha um card e inicie o cronometro</p>
         <div className={styles.relogioWrapper}>
             <Relogio tempo={tempo} />
         </div>
-        <Botao onClick={() => regressiva(tempo)}>
-            Começar!
-        </Botao>
+
+        <div className={styles.containerButton}>
+          <Botao onClick={startCounter}>
+              Começar!
+          </Botao>
+          <Botao onClick={stopCounter}>
+              Parar!
+          </Botao>
+          <Botao onClick={resetCounter}>
+              Reiniciar!
+          </Botao>
+        </div>
     </div>
   )
 }

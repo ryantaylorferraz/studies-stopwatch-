@@ -16,7 +16,7 @@ export const Lista = ({tarefas, selecionaTarefa }: {tarefas: Props}) => {
       <h2 onClick={() => {
         setTarefas([...tarefas, {tarefa: "Estudar estado", tempo: "05:00:00"}]) 
       }}>Estudos do dia</h2>
-      <ul>
+      <ul className={styles.ulContainer}>
         {tarefas.map((item) => (
           <Item selecionaTarefa={selecionaTarefa} key={item.id} {...item}/>
         ))}

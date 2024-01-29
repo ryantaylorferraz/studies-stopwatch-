@@ -21,7 +21,7 @@ export const Formulario = ({setTarefas}: Props) => {
     }
 
   return (
-    <div>
+    <div className={styles.divContainer}>
         <form className={styles.novaTarefa} onSubmit={adicionarTarefa}>
             <div className={styles.inputContainer}>
                 <label htmlFor='tarefa'>
