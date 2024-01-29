@@ -8,8 +8,8 @@ interface Props {
 }
 
 export const Formulario = ({setTarefas}: Props) => {
-    const [tarefa, setTarefa] = useState("React");
-    const [tempo, setTempo] = useState("00:00:02")
+    const [tarefa, setTarefa] = useState("");
+    const [tempo, setTempo] = useState("00:00")
 
     const adicionarTarefa = (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()

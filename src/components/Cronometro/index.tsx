@@ -35,7 +35,7 @@ export const Cronometro = ({selecionado, finalizarTarefa}: Props) => {
   }
 
   useEffect(() => {
-    let intervalId: NodeJS.Timeout | undefined;
+    let intervalId: ReturnType<WindowOrWorkerGlobalScope['setTimeout']> | undefined;
     if(running) {
       if(tempo) {
         intervalId = setInterval(() => {
@@ -62,7 +62,7 @@ export const Cronometro = ({selecionado, finalizarTarefa}: Props) => {
               Começar!
           </Botao>
           <Botao onClick={stopCounter}>
-              Parar!
+              Pausar!
           </Botao>
           <Botao onClick={resetCounter}>
               Reiniciar!
